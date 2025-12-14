@@ -169,8 +169,8 @@ FEATURE_CONFIG = {
 }
 
 # Umbrales de decisión
-THRESHOLD_LOW = 0.3  # Por debajo: Aprobar
-THRESHOLD_HIGH = 0.6  # Por encima: Rechazar
+THRESHOLD_LOW = 0.3  # Por debajo: Riesgo Bajo
+THRESHOLD_HIGH = 0.6  # Por encima: Riesgo Alto
 
 # ============================================
 # FUNCIONES DE CARGA
@@ -202,7 +202,7 @@ def load_model():
 # FUNCIONES DE VISUALIZACIÓN
 # ============================================
 def create_gauge_chart(probability: float) -> go.Figure:
-    """Crea un gráfico de velocímetro para la probabilidad de default."""
+    """Crea un gráfico de velocímetro para la probabilidad de disagnóstico de diabetes."""
     if probability < THRESHOLD_LOW:
         color = "#28a745"
     elif probability < THRESHOLD_HIGH:
@@ -216,7 +216,7 @@ def create_gauge_chart(probability: float) -> go.Figure:
             value=probability * 100,
             number={"suffix": "%", "font": {"size": 40}},
             delta={"reference": 50, "relative": False, "position": "bottom"},
-            title={"text": "Probabilidad de Default", "font": {"size": 20}},
+            title={"text": "Probabilidad de Diabetes", "font": {"size": 20}},
             gauge={
                 "axis": {"range": [0, 100], "tickwidth": 2, "tickcolor": "#1e3a5f"},
                 "bar": {"color": color, "thickness": 0.75},
@@ -354,7 +354,7 @@ def main():
     st.markdown(
         """
     <div class="main-header">
-        <h1>🩺 Sistema de Detección de Diabetes</h1>
+        <h1>🩺 Sistema de Evaluación de Diabetes</h1>
         <h4>Control 2: Modelo Gradient Boosting</h4>
         <p>Machine Learning en Producción - PECD UNI</p>
     </div>
@@ -481,11 +481,11 @@ def main():
             with st.expander("🔍 Ver datos técnicos"):
                 st.json(
                     {
-                        "probabilidad_default": round(probability, 4),
-                        "decision": "APROBAR"
+                        "probabilidad_diabetes": round(probability, 4),
+                        "decision": "Riesgo Bajo"
                         if probability < THRESHOLD_LOW
                         else (
-                            "REVISAR" if probability < THRESHOLD_HIGH else "RECHAZAR"
+                            "Riesgo Moderado" if probability < THRESHOLD_HIGH else "Riesgo Alto"
                         ),
                         "inputs": input_values,
                         "threshold_low": THRESHOLD_LOW,
