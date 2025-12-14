@@ -1,0 +1,25 @@
+{
+  "model_type": "Gradient Boosting",
+  "model_file": "model_texto.txt",
+  "feature_names": [
+    "Pregnancies",
+    "Glucose",
+    "BloodPressure",
+    "SkinThickness",
+    "Insulin",
+    "BMI",
+    "DiabetesPedigreeFunction",
+    "Age"
+  ],
+  "n_features": 8,
+  "target_col": "Outcome",
+  "metrics": {
+    "auc_test": 0.8306,
+    "n_train_samples": 614,
+    "n_test_samples": 154
+  },
+  "training_info": {
+    "date": "2025-12-13T22:09:37.590677",
+    "version": "1.7.2"
+  }
+}
